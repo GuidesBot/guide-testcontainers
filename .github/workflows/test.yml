@@ -27,6 +27,8 @@ jobs:
           echo github.ref: ${{ github.ref }}
           echo github.head_ref: ${{ github.head_ref }}
           echo github.base_ref: ${{ github.base_ref }}
+          echo github.actor: ${{ github.actor }}
+          echo github.actor_id: ${{ github.actor_id }}          
       - id: Lint-Code-Base
         if: "!contains(github.head_ref, ':')"
         uses: github/super-linter@latest
