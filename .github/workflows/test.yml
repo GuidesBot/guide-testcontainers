@@ -31,7 +31,7 @@ jobs:
           echo github.actor_id: ${{ github.actor_id }}
           echo github.workflow_ref: ${{ github.workflow_ref }}
       - id: Lint-Code-Base
-        if: "!contains(github.head_ref, 'fork')"
+        if: "! github.event.pull_request.head.repo.fork "
         uses: github/super-linter@latest
         env:
           VALIDATE_ALL_CODEBASE: false
@@ -42,7 +42,7 @@ jobs:
           LINTER_RULES_PATH: ./tools/pr-checker/linters/
           DEFAULT_BRANCH: prod
       - name: Summary
-        if: always()
+        if: "! github.event.pull_request.head.repo.fork "
         run: |
           cat ./checker.log |  tail -n +2; echo "====== Super Linter ======"
           cat ./super-linter.log | sed -n '/.*The script has completed.*/,$p' | tail -n +4 | sed  's/.*\(\[[A-Z]\+\]\)/\1/'
