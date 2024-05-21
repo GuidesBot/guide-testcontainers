@@ -30,7 +30,7 @@ jobs:
           echo github.actor: ${{ github.actor }}
           echo github.actor_id: ${{ github.actor_id }}          
       - id: Lint-Code-Base
-        if: "!contains(github.head_ref, ':')"
+        if: "!contains(github.head_ref, 'fork')"
         uses: github/super-linter@latest
         env:
           VALIDATE_ALL_CODEBASE: false
